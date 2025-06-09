@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshMart - Your Online Grocery Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header id="header" class="fixed border-b top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-emerald-600">FreshMart</a>
+
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#home" class="text-gray-700 hover:text-emerald-600 transition duration-300">Home</a>
+                <a href="#products" class="text-gray-700 hover:text-emerald-600 transition duration-300">Products</a>
+                <a href="#categories" class="text-gray-700 hover:text-emerald-600 transition duration-300">Categories</a>
+                <a href="#about" class="text-gray-700 hover:text-emerald-600 transition duration-300">About</a>
+                <a href="#contact" class="text-gray-700 hover:text-emerald-600 transition duration-300">Contact</a>
+                <button id="desktop-cart-button" aria-label="Open Cart" class="relative text-gray-700 hover:text-emerald-600 transition duration-300 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    <span id="cart-total-price" class="cart-price-display">$0.00</span>
+                </button>
+            </div>
+
+            <div class="md:hidden flex items-center">
+                 <button id="mobile-cart-button" aria-label="Open Cart" class="relative text-gray-700 hover:text-emerald-600 transition duration-300 mr-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span id="mobile-cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    <span id="mobile-cart-total-price" class="mobile-cart-price-display">$0.00</span>
+                 </button>
+                 <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <a href="#home" class="block px-4 py-2 text-gray-700 hover:bg-emerald-50 transition duration-300">Home</a>
+            <a href="#products" class="block px-4 py-2 text-gray-700 hover:bg-emerald-50 transition duration-300">Products</a>
+            <a href="#categories" class="block px-4 py-2 text-gray-700 hover:bg-emerald-50 transition duration-300">Categories</a>
+            <a href="#about" class="block px-4 py-2 text-gray-700 hover:bg-emerald-50 transition duration-300">About</a>
+            <a href="#contact" class="block px-4 py-2 text-gray-700 hover:bg-emerald-50 transition duration-300">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="pt-10 bg-gradient-to-r from-emerald-50 to-teal-50">
+             <div class="container mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4 leading-tight">
+                        Fresh Groceries Delivered <span class="text-emerald-600">Fast</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Get the best quality fruits, vegetables, dairy, and more delivered right to your doorstep.
+                    </p>
+                    <a href="#products" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-block shadow-md hover:shadow-lg">
+                        Shop Now
+                    </a>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/hero-section.jpg" alt="Fresh grocery produce illustration" class="rounded-lg shadow-xl w-full max-w-md">
+                </div>
+            </div>
+        </section>
+
+        <section id="popular-products" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Popular Picks</h2>
+                <div class="swiper product-swiper">
+                    <div class="swiper-wrapper pb-8"> <div class="swiper-slide p-1 h-auto"> <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl h-full flex flex-col"
+                                 data-id="apple-organic" data-name="Organic Apples" data-price="3.99" data-image="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/organic-apples.png">
+                                <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/organic-apples.png" alt="Organic Apples" class="w-full h-48 object-cover">
+                                <div class="p-4 flex flex-col flex-grow">
+                                    <h3 class="font-semibold text-lg mb-2">Organic Apples</h3>
+                                    <p class="product-price text-gray-600 mb-3">$3.99 / lb</p>
+                                    <div class="flex items-center mb-3">
+                                        <span class="text-yellow-400">★★★★☆</span> <span class="text-gray-500 text-sm ml-2">(120)</span>
+                                    </div>
+                                    <button class="add-to-cart-btn mt-auto w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg transition duration-300">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide p-1 h-auto">
+                           <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl h-full flex flex-col"
+                                data-id="milk-gallon" data-name="Fresh Milk (1 Gallon)" data-price="4.50" data-image="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/fresh-milk.png">
+                                <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/fresh-milk.png" alt="Fresh Milk" class="w-full h-48 object-cover">
+                                <div class="p-4 flex flex-col flex-grow">
+                                    <h3 class="font-semibold text-lg mb-2">Fresh Milk (1 Gallon)</h3>
+                                    <p class="product-price text-gray-600 mb-3">$4.50</p>
+                                     <div class="flex items-center mb-3">
+                                        <span class="text-yellow-400">★★★★★</span> <span class="text-gray-500 text-sm ml-2">(250)</span>
+                                    </div>
+                                    <button class="add-to-cart-btn mt-auto w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg transition duration-300">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="swiper-slide p-1 h-auto">
+                           <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl h-full flex flex-col"
+                                data-id="bread-wheat" data-name="Whole Wheat Bread" data-price="2.99" data-image="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/whole-wheat-bread.png">
+                                <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/whole-wheat-bread.png" alt="Whole Wheat Bread" class="w-full h-48 object-cover">
+                                <div class="p-4 flex flex-col flex-grow">
+                                    <h3 class="font-semibold text-lg mb-2">Whole Wheat Bread</h3>
+                                    <p class="product-price text-gray-600 mb-3">$2.99</p>
+                                     <div class="flex items-center mb-3">
+                                        <span class="text-yellow-400">★★★★☆</span> <span class="text-gray-500 text-sm ml-2">(95)</span>
+                                    </div>
+                                    <button class="add-to-cart-btn mt-auto w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg transition duration-300">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide p-1 h-auto">
+                           <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl h-full flex flex-col"
+                                data-id="avocado-each" data-name="Ripe Avocados (Each)" data-price="1.50" data-image="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/ripe-avocados.png">
+                                <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/ripe-avocados.png" alt="Avocado" class="w-full h-48 object-cover">
+                                <div class="p-4 flex flex-col flex-grow">
+                                    <h3 class="font-semibold text-lg mb-2">Ripe Avocados (Each)</h3>
+                                    <p class="product-price text-gray-600 mb-3">$1.50</p>
+                                     <div class="flex items-center mb-3">
+                                        <span class="text-yellow-400">★★★★★</span> <span class="text-gray-500 text-sm ml-2">(180)</span>
+                                    </div>
+                                    <button class="add-to-cart-btn mt-auto w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg transition duration-300">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide p-1 h-auto">
+                            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl h-full flex flex-col"
+                                 data-id="fresh-orange-juice" data-name="Fresh Orange Juice" data-price="3.50" data-image="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/fresh-orange-juice.jpg">
+                                 <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/fresh-orange-juice.jpg" alt="Fresh Orange Juice" class="w-full h-48 object-cover">
+                                 <div class="p-4 flex flex-col flex-grow">
+                                     <h3 class="font-semibold text-lg mb-2">Fresh Orange Juice</h3>
+                                     <p class="product-price text-gray-600 mb-3">$3.50</p>
+                                      <div class="flex items-center mb-3">
+                                         <span class="text-yellow-400">★★★★★</span> <span class="text-gray-500 text-sm ml-2">(180)</span>
+                                     </div>
+                                     <button class="add-to-cart-btn mt-auto w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg transition duration-300">Add to Cart</button>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="swiper-slide p-1 h-auto">
+                            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl h-full flex flex-col"
+                                 data-id="broccoli" data-name="Broccoli" data-price="1.38" data-image="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/broccoli.jpg">
+                                 <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/broccoli.jpg" alt="Broccoli" class="w-full h-48 object-cover">
+                                 <div class="p-4 flex flex-col flex-grow">
+                                     <h3 class="font-semibold text-lg mb-2">Broccoli</h3>
+                                     <p class="product-price text-gray-600 mb-3">$1.38 / Kg</p>
+                                      <div class="flex items-center mb-3">
+                                         <span class="text-yellow-400">★★★★★</span> <span class="text-gray-500 text-sm ml-2">(180)</span>
+                                     </div>
+                                     <button class="add-to-cart-btn mt-auto w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg transition duration-300">Add to Cart</button>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="swiper-slide p-1 h-auto">
+                            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl h-full flex flex-col"
+                                 data-id="fresh-cucumbers" data-name="Fresh Cucumbers" data-price="6.70" data-image="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/cucumbers.jpg">
+                                 <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/cucumbers.jpg" alt="Fresh Cucumbers" class="w-full h-48 object-cover">
+                                 <div class="p-4 flex flex-col flex-grow">
+                                     <h3 class="font-semibold text-lg mb-2">Fresh Cucumbers</h3>
+                                     <p class="product-price text-gray-600 mb-3">$6.70 / Kg</p>
+                                      <div class="flex items-center mb-3">
+                                         <span class="text-yellow-400">★★★★★</span> <span class="text-gray-500 text-sm ml-2">(180)</span>
+                                     </div>
+                                     <button class="add-to-cart-btn mt-auto w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg transition duration-300">Add to Cart</button>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="swiper-slide p-1 h-auto">
+                            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl h-full flex flex-col"
+                                 data-id="banana" data-name="Banana" data-price="1.68" data-image="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/banana.jpg">
+                                 <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/banana.jpg" alt="Banana" class="w-full h-48 object-cover">
+                                 <div class="p-4 flex flex-col flex-grow">
+                                     <h3 class="font-semibold text-lg mb-2">Banana</h3>
+                                     <p class="product-price text-gray-600 mb-3">$1.68 / Kg</p>
+                                      <div class="flex items-center mb-3">
+                                         <span class="text-yellow-400">★★★★★</span> <span class="text-gray-500 text-sm ml-2">(180)</span>
+                                     </div>
+                                     <button class="add-to-cart-btn mt-auto w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg transition duration-300">Add to Cart</button>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="swiper-slide p-1 h-auto">
+                            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl h-full flex flex-col"
+                                 data-id="watermelon" data-name="Watermelon" data-price="0.55" data-image="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/fresh-watermelon.png">
+                                 <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/fresh-watermelon.png" alt="Watermelon" class="w-full h-48 object-cover">
+                                 <div class="p-4 flex flex-col flex-grow">
+                                     <h3 class="font-semibold text-lg mb-2">Watermelon</h3>
+                                     <p class="product-price text-gray-600 mb-3">$0.55 / Kg</p>
+                                      <div class="flex items-center mb-3">
+                                         <span class="text-yellow-400">★★★★★</span> <span class="text-gray-500 text-sm ml-2">(180)</span>
+                                     </div>
+                                     <button class="add-to-cart-btn mt-auto w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg transition duration-300">Add to Cart</button>
+                                 </div>
+                             </div>
+                         </div>
+                        </div>
+                    <div class="swiper-pagination product-pagination relative mt-4"></div> <div class="swiper-button-next product-next"></div>
+                    <div class="swiper-button-prev product-prev"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="categories" class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Shop by Category</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <a href="#" class="category-item group block text-center p-4 bg-white rounded-lg shadow hover:shadow-lg transition duration-300">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/category-fruits.jpg" alt="Fruits Category" class="w-16 h-16 mx-auto mb-3 rounded-full border-2 border-emerald-200 group-hover:border-emerald-500 transition duration-300">
+                        <span class="font-semibold text-gray-700 group-hover:text-emerald-600 transition duration-300">Fruits</span>
+                    </a>
+                    <a href="#" class="category-item group block text-center p-4 bg-white rounded-lg shadow hover:shadow-lg transition duration-300">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/category-vegetables.jpg" alt="Vegetables Category" class="w-16 h-16 mx-auto mb-3 rounded-full border-2 border-emerald-200 group-hover:border-emerald-500 transition duration-300">
+                        <span class="font-semibold text-gray-700 group-hover:text-emerald-600 transition duration-300">Vegetables</span>
+                    </a>
+                     <a href="#" class="category-item group block text-center p-4 bg-white rounded-lg shadow hover:shadow-lg transition duration-300">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/category-dairy.jpg" alt="Dairy Category" class="w-16 h-16 mx-auto mb-3 rounded-full border-2 border-emerald-200 group-hover:border-emerald-500 transition duration-300">
+                        <span class="font-semibold text-gray-700 group-hover:text-emerald-600 transition duration-300">Dairy</span>
+                    </a>
+                     <a href="#" class="category-item group block text-center p-4 bg-white rounded-lg shadow hover:shadow-lg transition duration-300">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/category-meat.jpg" alt="Meat Category" class="w-16 h-16 mx-auto mb-3 rounded-full border-2 border-emerald-200 group-hover:border-emerald-500 transition duration-300">
+                        <span class="font-semibold text-gray-700 group-hover:text-emerald-600 transition duration-300">Meat</span>
+                    </a>
+                     <a href="#" class="category-item group block text-center p-4 bg-white rounded-lg shadow hover:shadow-lg transition duration-300">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/category-bakery.jpg" alt="Bakery Category" class="w-16 h-16 mx-auto mb-3 rounded-full border-2 border-emerald-200 group-hover:border-emerald-500 transition duration-300">
+                        <span class="font-semibold text-gray-700 group-hover:text-emerald-600 transition duration-300">Bakery</span>
+                    </a>
+                     <a href="#" class="category-item group block text-center p-4 bg-white rounded-lg shadow hover:shadow-lg transition duration-300">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/category-beverages.jpg" alt="Beverages Category" class="w-16 h-16 mx-auto mb-3 rounded-full border-2 border-emerald-200 group-hover:border-emerald-500 transition duration-300">
+                        <span class="font-semibold text-gray-700 group-hover:text-emerald-600 transition duration-300">Beverages</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Featured Products</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl flex flex-col"
+                         data-id="berry-mix" data-name="Organic Berry Mix" data-price="6.50" data-image="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/organic-berry-mix.png">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/organic-berry-mix.png" alt="Organic Berries" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-lg mb-2">Organic Berry Mix</h3>
+                            <p class="product-price text-gray-600 mb-3">$6.50 / pack</p>
+                            <div class="flex items-center mb-3">
+                                <span class="text-yellow-400">★★★★★</span> <span class="text-gray-500 text-sm ml-2">(88)</span>
+                            </div>
+                            <button class="add-to-cart-btn mt-auto w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl flex flex-col"
+                          data-id="yogurt-greek" data-name="Greek Yogurt (Plain)" data-price="4.20" data-image="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/greek-yogurt.png">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/greek-yogurt.png" alt="Greek Yogurt" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-lg mb-2">Greek Yogurt (Plain)</h3>
+                            <p class="product-price text-gray-600 mb-3">$4.20</p>
+                            <div class="flex items-center mb-3">
+                                <span class="text-yellow-400">★★★★☆</span> <span class="text-gray-500 text-sm ml-2">(150)</span>
+                            </div>
+                            <button class="add-to-cart-btn mt-auto w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl flex flex-col"
+                          data-id="salmon-fillet" data-name="Fresh Salmon Fillet" data-price="12.99" data-image="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/fresh-salmon-fillet.png">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/fresh-salmon-fillet.png" alt="Salmon Fillet" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-lg mb-2">Fresh Salmon Fillet</h3>
+                            <p class="product-price text-gray-600 mb-3">$12.99 / lb</p>
+                            <div class="flex items-center mb-3">
+                                <span class="text-yellow-400">★★★★★</span> <span class="text-gray-500 text-sm ml-2">(75)</span>
+                            </div>
+                            <button class="add-to-cart-btn mt-auto w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl flex flex-col"
+                          data-id="crackers-artisan" data-name="Artisan Seed Crackers" data-price="5.00" data-image="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/artisan-seed-crackers.png">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/artisan-seed-crackers.png" alt="Artisan Crackers" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-lg mb-2">Artisan Seed Crackers</h3>
+                            <p class="product-price text-gray-600 mb-3">$5.00</p>
+                            <div class="flex items-center mb-3">
+                                <span class="text-yellow-400">★★★★☆</span> <span class="text-gray-500 text-sm ml-2">(40)</span>
+                            </div>
+                            <button class="add-to-cart-btn mt-auto w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="offers" class="relative py-12 text-white object-cover" style="background-image: url('discount.jpg');">
+            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="relative container mx-auto px-4 text-center z-10">
+                <h2 class="text-3xl font-bold mb-4">Get 15% Off Your First Order!</h2>
+                <p class="text-lg mb-6">
+                    Use code <strong class="bg-white text-emerald-600 px-2 py-1 rounded">FRESH15</strong> at checkout.
+                </p>
+                <a href="#products" class="bg-white hover:bg-gray-100 text-emerald-600 font-bold py-3 px-8 rounded-full transition duration-300 inline-block shadow-md hover:shadow-lg">
+                    Shop Now & Save
+                </a>
+            </div>
+        </section>
+
+        <section id="testimonials" class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">What Our Customers Say</h2>
+                <div class="swiper testimonial-swiper">
+                    <div class="swiper-wrapper pb-8"> <div class="swiper-slide p-4">
+                            <div class="bg-white rounded-lg shadow p-6 text-center max-w-lg mx-auto">
+                                <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/customer-1.jpg" alt="Customer 1" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-emerald-200">
+                                <p class="text-gray-600 italic mb-4">"The produce is always fresh, and the delivery is incredibly fast! FreshMart is my go-to for weekly groceries."</p>
+                                <p class="font-semibold text-gray-800">- Sarah K.</p>
+                                <div class="text-yellow-400 mt-2">★★★★★</div>
+                            </div>
+                        </div>
+                         <div class="swiper-slide p-4">
+                            <div class="bg-white rounded-lg shadow p-6 text-center max-w-lg mx-auto">
+                                <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/customer-2.jpg" alt="Customer 2" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-emerald-200">
+                                <p class="text-gray-600 italic mb-4">"Great selection and prices. The website is easy to use, and I love the special offers."</p>
+                                <p class="font-semibold text-gray-800">- Michael P.</p>
+                                <div class="text-yellow-400 mt-2">★★★★☆</div>
+                            </div>
+                        </div>
+                         <div class="swiper-slide p-4">
+                            <div class="bg-white rounded-lg shadow p-6 text-center max-w-lg mx-auto">
+                                <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/customer-3.png" alt="Customer 3" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-emerald-200">
+                                <p class="text-gray-600 italic mb-4">"Excellent customer service and high-quality products. Highly recommend!"</p>
+                                <p class="font-semibold text-gray-800">- Emily R.</p>
+                                <div class="text-yellow-400 mt-2">★★★★★</div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide p-4">
+                            <div class="bg-white rounded-lg shadow p-6 text-center max-w-lg mx-auto">
+                                <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/customer-4.png" alt="Customer 4" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-emerald-200">
+                                <p class="text-gray-600 italic mb-4">"The quality of the produce is always top-notch, and the delivery is super quick. Shopping here makes grocery buying so easy and enjoyable!"</p>
+                                <p class="font-semibold text-gray-800">- John C.</p>
+                                <div class="text-yellow-400 mt-2">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination testimonial-pagination relative mt-4"></div> </div>
+            </div>
+        </section>
+
+        <section id="newsletter" class="py-16 bg-white">
+             <div class="container mx-auto px-4 text-center max-w-2xl">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Stay Updated!</h2>
+                <p class="text-gray-600 mb-8">Subscribe to our newsletter for the latest deals, recipes, and news.</p>
+                <form id="newsletter-form" class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <input type="email" id="newsletter-email" name="email" placeholder="Enter your email address" required class="w-full sm:w-auto flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition duration-300" aria-label="Email Address">
+                    <button type="submit" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 shadow hover:shadow-md">
+                        Subscribe
+                    </button>
+                </form>
+                 <p id="newsletter-message" class="mt-4 text-sm text-green-600"></p>
+            </div>
+        </section>
+
+        <section id="about" class="py-16 bg-gray-50">
+             <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                     <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/grocery-website/about-us.jpg" alt="About FreshMart Team" class="rounded-lg shadow-xl w-full">
+                </div>
+                 <div class="md:w-1/2 text-center md:text-left">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">About FreshMart</h2>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Founded with a passion for fresh, high-quality food, FreshMart aims to make grocery shopping convenient and enjoyable. We partner with local farmers and trusted suppliers to bring the best products directly to your home.
+                    </p>
+                     <p class="text-gray-600 leading-relaxed">
+                        Our mission is simple: provide fresh, healthy food options with exceptional service, making healthy eating accessible to everyone.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">FreshMart</h3>
+                    <p class="text-sm">Your one-stop shop for fresh groceries, delivered fast.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                 <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="hover:text-emerald-400 transition duration-300">Home</a></li>
+                        <li><a href="#products" class="hover:text-emerald-400 transition duration-300">Products</a></li>
+                        <li><a href="#categories" class="hover:text-emerald-400 transition duration-300">Categories</a></li>
+                        <li><a href="#about" class="hover:text-emerald-400 transition duration-300">About Us</a></li>
+                        <li><a href="#contact" class="hover:text-emerald-400 transition duration-300">Contact</a></li>
+                        <li><a href="#" class="hover:text-emerald-400 transition duration-300">FAQs</a></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Contact Us</h4>
+                     <ul class="space-y-2 text-sm">
+                        <li class="flex items-start"><i class="fas fa-map-marker-alt mr-2 mt-1 flex-shrink-0"></i><span>123 Grocery Lane,<br> Foodville, FL 12345</span></li>
+                        <li class="flex items-center"><i class="fas fa-phone-alt mr-2 flex-shrink-0"></i><span>(555) 123-4567</span></li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2 flex-shrink-0"></i><span>support@freshmart.com</span></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Newsletter</h4>
+                    <p class="text-sm mb-3">Get updates on new arrivals and sales.</p>
+                    <form id="footer-newsletter-form" class="flex">
+                        <input type="email" id="footer-newsletter-email" name="email" placeholder="Your email" required class="flex-grow px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-l-lg focus:outline-none focus:ring-1 focus:ring-emerald-500 text-sm" aria-label="Email Address">
+                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-r-lg transition duration-300 text-sm">Go</button>
+                    </form>
+                    <p id="footer-newsletter-message" class="mt-3 text-xs text-green-400"></p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center text-sm">
+                <p>© 2025 FreshMart. All Rights Reserved.</p>
+                <p class="mt-2">Made by <a href="https://www.codewithfaraz.com" class="text-emerald-400 hover:underline" target="_blank">CodeWithFaraz</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cart-popup-overlay"></div> <div id="cart-popup">
+        <div class="cart-popup-header">
+            <h3 class="text-lg font-semibold text-gray-800">Your Cart</h3>
+            <button id="close-cart-popup" aria-label="Close Cart" class="text-gray-500 hover:text-gray-700 transition duration-300">
+                <i class="fas fa-times fa-lg"></i>
+            </button>
+        </div>
+
+        <div id="cart-items-list" class="cart-popup-body">
+            <p class="empty-cart-message">Your cart is empty.</p>
+        </div>
+
+        <div class="cart-popup-footer">
+            <div class="cart-summary mb-4">
+                <div>
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                <div>
+                    <span>Tax (Est. 5%)</span>
+                    <span id="cart-tax">$0.00</span>
+                </div>
+                <div class="total">
+                    <span>Total</span>
+                    <span id="cart-final-total">$0.00</span>
+                </div>
+            </div>
+            <div class="cart-popup-actions">
+                <button class="checkout-btn">Proceed to Checkout</button>
+                <button class="continue-shopping-btn" id="continue-shopping-btn">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
